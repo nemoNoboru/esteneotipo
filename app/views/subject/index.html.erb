@@ -1,1 +1,12 @@
-<%= @troll %>
+<div class="panel panel-default">
+  <div class="panel-heading">All subjects <span class="separator"></span>  <a href="subject/create" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a subject</a></div>
+  <div class="panel-body">
+    <% @subjects.each do |subject| %>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <%= subject.name %><span class="separator"></span><a href="destroy" class="pull-right btn btn-danger" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

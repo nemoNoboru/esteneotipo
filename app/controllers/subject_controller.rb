@@ -1,5 +1,11 @@
 class SubjectController < ApplicationController
   def index
-    @troll = "no lo pillo"
+    @subjects = Subject.all
+  end
+  def create
+    @id = params[:id]
+  end
+  def destroy
+    @id = params[:id]
   end
 end
