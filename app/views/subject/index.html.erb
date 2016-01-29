@@ -1,12 +1,45 @@
-<div class="panel panel-default">
-  <div class="panel-heading">All subjects <span class="separator"></span>  <a href="subject/create" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a subject</a></div>
-  <div class="panel-body">
-    <% @subjects.each do |subject| %>
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <%= subject.name %><span class="separator"></span><a href="destroy" class="pull-right btn btn-danger" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
-        </div>
+<!-- main -->
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 col-sm-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">All subjects <span class="separator"></span>  <button data-toggle="modal" data-target="#createSubject" class="btn btn-sm btn-success "><span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add a subject</button></div>
+      <div class="panel-body">
+        <% @subjects.each do |subject| %>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <%= subject.name %>
+              <!--<span class="separator"></span><a href="destroy" class="pull-right btn btn-danger" ><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>-->
+              <%= button_to "subject/#{subject.id}" , method: :delete , class: 'pull-right btn btn-danger' do %>
+              Delete<span class="separator"></span><span class=" glyphicon glyphicon-trash" aria-hidden="true"></span>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
+    <span class=".notice"><%= flash[:notice] %></span>
   </div>
+  <div class="col-md-2"></div>
 </div>
+<!-- Modal -->
+<div class="modal fade" id="createSubject" tabindex="-1" role="dialog" aria-labelledby="createSubject">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Create Subject</h4>
+      </div>
+        <form action="subject" method="post">
+          <div class="modal-body form-group">
+            <input type="text" name="name" required="true" class="form-control" placeholder="Subject name">
+            <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
