@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-2"></div>
+  <div class="col-md-8 col-sm-12">
+    <% @weeks.each do |week| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">Week <%= week.number %> <span class="separator"></span>
+      </div>
+      <div class="panel-body">
+        <% div = 12 / @subjects.size %>
+        <% @subjects.each do |subject| %>
+        <div class="col-sm-12 col-md-<%= div %>">
+          <p class="lead"><%= subject.name %></p>
+          <% @notes.each do |note| %>
+            <% if note.subject_id == subject.id && note.week_id == week.id %>
+              <p><%= note.title %></p>
+            <% end %>
+          <% end %>
+          <%= link_to "note", method: :new do %>
+          create note
+          <% end %>
+        </div>
+        <% end %>
+      </div>
+    </div>
+    <% end %>
+    <%= button_to "week" , method: :create , class: 'btn btn-success' do %>
+    New week<span class="separator"></span><span class=" glyphicon glyphicon-plus" aria-hidden="true"></span>
+    <% end %>
+    <span class=".notice"><%= flash[:notice] %></span>
+  </div>
+  <div class="col-md-2"></div>
+</div>

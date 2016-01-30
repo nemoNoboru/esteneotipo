@@ -54,5 +54,6 @@ Rails.application.routes.draw do
   #     resources :products
   #   end
   resources :subject
-  resources :notes
+  resources :note
+  resources :week
 end
