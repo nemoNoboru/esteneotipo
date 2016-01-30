@@ -55,5 +55,5 @@ Rails.application.routes.draw do
   #   end
   resources :subject
   resources :note
-  resources :week
+  resources :week , :only => :create
 end

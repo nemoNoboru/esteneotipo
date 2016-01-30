@@ -6,4 +6,9 @@ class NoteController < ApplicationController
     @notes = Note.all
   end
 
+  def show
+    id = params[:id]
+    @note = Note.find id
+  end
+
 end
