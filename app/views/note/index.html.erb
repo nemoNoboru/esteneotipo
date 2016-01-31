@@ -9,16 +9,15 @@
         <% div = 12 / @subjects.size %>
         <% @subjects.each do |subject| %>
         <div class="col-sm-12 col-md-<%= div %>">
-          <p class="lead"><%= subject.name %> <%= link_to "new" do %><span class="text-success glyphicon glyphicon-plus" aria-hidden="true"></span><% end %></p>
+          <p class="lead"><%= subject.name %> <%= link_to "note/new/week/#{week.id}/subject/#{subject.id}" , method: :create do %><span class="text-success glyphicon glyphicon-plus" aria-hidden="true"></span><% end %></p>
           <% @notes.each do |note| %>
             <% if note.subject_id == subject.id && note.week_id == week.id %>
               <p><%= link_to note.title ,note_path(note) %><span class="separator"></span>
-                <%= link_to edit_subject_path(note) do %><span class="text-warning glyphicon glyphicon-edit" aria-hidden="true"></span><% end %>
+                <%= link_to edit_note_path(note) do %><span class="text-secondary glyphicon glyphicon-edit" aria-hidden="true"></span><% end %>
                 <%= link_to note,:method => :delete do %><span class="text-danger glyphicon glyphicon-trash" aria-hidden="true"></span><% end %>
               </p>
             <% end %>
           <% end %>
-
         </div>
         <% end %>
       </div>
