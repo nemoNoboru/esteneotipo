@@ -2,16 +2,22 @@
 <div class="panel panel-default">
   <div class="panel-heading"> Editing note #<%= @note.id %> </div>
   <div class="panel-body">
-    <form method="post" action="note/edit/<%= @note.id %>" id="noteEditor">
+    <form method="post" action='/note/<%= @note.id %>' id="noteEditor">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <div class="form-group">
+        <input name="_method" type="hidden" value="patch" />
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
         <input type="text" name="title" required="true" class="form-control" value='<%= @note.title %>'>
+        <br/>
         <textarea name="ckeditor" id="ckeditor"><%= @note.content %></textarea>
         <script>
           CKEDITOR.basePath = '/assets/ckeditor/';
           CKEDITOR.replace( 'ckeditor' );
         </script>
+        <br/>
+        <input type="submit" value='Save' class="btn btn-success btn-block"><a href="/note"class="btn btn-default btn-block">Back<a/>
       </div>
     </form>
   </div>
 </div>
+<span class=".notice"><%= flash[:notice] %></span>

@@ -18,7 +18,7 @@ class NoteController < ApplicationController
     @note.title = 'title'
     @note.content = 'test'
     @note.save
-    redirect_to "/note" , notice: "#{@note.title} was successfully created"
+    redirect_to "/note/#{@note.id}/edit" , notice: "#{@note.title} was successfully created"
   end
 
   def destroy
@@ -31,5 +31,11 @@ class NoteController < ApplicationController
     @note = Note.find(params[:id])
   end
 
-
+  def update
+    note = Note.find(params[:id])
+    note.title = params[:title]
+    note.content = params[:ckeditor]
+    note.save
+    redirect_to "/note/#{note.id}/edit" , notice: "#{note.title} was successfully saved"
+  end
 end
