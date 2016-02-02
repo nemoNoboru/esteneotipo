@@ -57,4 +57,5 @@ Rails.application.routes.draw do
   resources :note
   resources :week , :only => :create
   post 'note/new/week/:week/subject/:subject',controller: 'note', action: :create
+  root 'note#index'
 end

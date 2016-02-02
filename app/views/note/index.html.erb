@@ -6,7 +6,7 @@
       <div class="panel-heading">Week <%= week.number %> <span class="separator"></span>
       </div>
       <div class="panel-body">
-        <% div = 12 / @subjects.size %>
+        <%if @subjects.size > 0 then div = 12 / @subjects.size end%>
         <% @subjects.each do |subject| %>
         <div class="col-sm-12 col-md-<%= div %>">
           <p class="lead"><%= subject.name %> <%= link_to "note/new/week/#{week.id}/subject/#{subject.id}" , method: :create do %><span class="text-success glyphicon glyphicon-plus" aria-hidden="true"></span><% end %></p>
@@ -26,7 +26,7 @@
     <%= button_to "week" , method: :create , class: 'btn btn-success' do %>
     New week<span class="separator"></span><span class=" glyphicon glyphicon-plus" aria-hidden="true"></span>
     <% end %>
-    <span class=".notice"><%= flash[:notice] %></span>
+    <span class="notice"><%= flash[:notice] %></span>
   </div>
   <div class="col-md-1"></div>
 </div>

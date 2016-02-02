@@ -2,7 +2,7 @@
 <div class="panel panel-default">
   <div class="panel-heading"> Editing note #<%= @note.id %> </div>
   <div class="panel-body">
-    <form method="post" action='/note/<%= @note.id %>' id="noteEditor">
+    <form method="post" data-remote="true" action='/note/<%= @note.id %>' id="noteEditor">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <div class="form-group">
         <input name="_method" type="hidden" value="patch" />
@@ -12,7 +12,10 @@
         <textarea name="ckeditor" id="ckeditor"><%= @note.content %></textarea>
         <script>
           CKEDITOR.basePath = '/assets/ckeditor/';
-          CKEDITOR.replace( 'ckeditor' );
+          var ckeditor = CKEDITOR.replace( 'ckeditor' );
+          ckeditor.on("change" , function(){
+            $(".notice").html("<p>Changed</p>")
+          });
         </script>
         <br/>
         <input type="submit" value='Save' class="btn btn-success btn-block"><a href="/note"class="btn btn-default btn-block">Back<a/>
@@ -20,4 +23,4 @@
     </form>
   </div>
 </div>
-<span class=".notice"><%= flash[:notice] %></span>
+<span class="notice"><%= flash[:notice] %></span>
